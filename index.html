@@ -8,16 +8,62 @@
 	<title>Superkvíz</title>
 	<link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body onload="zobrazOtazku()" onclick="klikNaOdpoved()">
 
 
 	<h1>Superkvíz</h1>
+
+	<div class="kviz">
+		<div id="poradi"></div>
+			<div id="otazka"></div>
+				
+			<div class="obsah">
+					<div class="foto">
+						<img id="obrazek" src="obrazky/Hrabac.jpg" alt="Hrabac">
+					</div>
+
+
+
+				<div id="moznosti">
+					<ul id="odpovedi">
+						<li class="moznostJedna"></li>
+						<li class="moznostDva"></li>
+						<li class="moznostTri"></li>
+					</ul>
+				</div>	
+
+		</div>
+
+
+		<div class="vysledek">
+			<h1>Tvoje hodnocení</h1>
+			<h2>1.<span id=""></span></h2>
+			<h3>Tvoje odpověď:<span id=""></span></h3>
+			<h3>Správná odpověď:<span id=""></span></h3>
+
+			<h2>2.<span id=""></span></h2>
+			<h3>Tvoje odpověď:<span id=""></span></h3>
+			<h3>Správná odpověď:<span id=""></span></h3>
+
+			<h2>2.<span id=""></span></h2>
+			<h3>Tvoje odpověď:<span id=""></span></h3>
+			<h3>Správná odpověď:<span id=""></span></h3>
+
+			<h1>Správně <span id=""></span> ze <span id=""></span> otázek. Úspěšnost je <span id=""></span> % </h1>
+
+		</div>
+
+
+
+	</div>
+
+
 
 	<!-- přidat <div> pro kvíz -->
 	<!-- do něj přidat <div>y pro samotné držení otázky -->
 	<!-- také nezapomenout na <div> pro výsledek a hodnocení -->
 
-	<script src="kviz.js"></script>
+	<script src="main.js"></script>
 
 </body>
 </html>

@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "../lekce7-objekty"
+		},
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "projekt2-superkviz"
+	}
+}
