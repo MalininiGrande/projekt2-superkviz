@@ -8,7 +8,12 @@
 	<title>Superkvíz</title>
 	<link rel="stylesheet" href="style.css">
 </head>
-<body onload="zobrazOtazku()" onclick="klikNaOdpoved()">
+<body onload="zobrazOtazku()">
+
+
+	<!-- přidat <div> pro kvíz -->
+	<!-- do něj přidat <div>y pro samotné držení otázky -->
+	<!-- také nezapomenout na <div> pro výsledek a hodnocení -->
 
 
 	<h1>Superkvíz</h1>
@@ -25,29 +30,31 @@
 
 
 				<div id="moznosti">
-					<ul id="odpovedi">
-						<li class="moznostJedna"></li>
-						<li class="moznostDva"></li>
-						<li class="moznostTri"></li>
+					<ul data-odpoved="odpoved" id="odpovedi" onclick="klikNaOdpoved()">
+						<li onclick="klikNaOdpoved()" class="moznostJedna"></li>
+						<li onclick="klikNaOdpoved()" class="moznostDva"></li>
+						<li onclick="klikNaOdpoved()" class="moznostTri"></li>
 					</ul>
 				</div>	
 
 		</div>
 
+	</div>
+
 
 		<div class="vysledek">
 			<h1>Tvoje hodnocení</h1>
-			<h2>1.<span id=""></span></h2>
-			<h3>Tvoje odpověď:<span id=""></span></h3>
-			<h3>Správná odpověď:<span id=""></span></h3>
+			<h2>1.<span class="otazkaJedna"></span></h2>
+			<h3>Tvoje odpověď:<span class="tvojeOdpovedJedna" ></span></h3>
+			<h3>Správná odpověď:<span class="spravnaJedna"></span></h3>
 
-			<h2>2.<span id=""></span></h2>
-			<h3>Tvoje odpověď:<span id=""></span></h3>
-			<h3>Správná odpověď:<span id=""></span></h3>
+			<h2>2.<span class="otazkaDva"></span></h2>
+			<h3>Tvoje odpověď:<span class="tvojeOdpovedDva"></span></h3>
+			<h3>Správná odpověď:<span class="spravnaDva"></span></h3>
 
-			<h2>2.<span id=""></span></h2>
-			<h3>Tvoje odpověď:<span id=""></span></h3>
-			<h3>Správná odpověď:<span id=""></span></h3>
+			<h2>3.<span class="otazkaTri"></span></h2>
+			<h3>Tvoje odpověď:<span class="tvojeOdpovedTri"></span></h3>
+			<h3>Správná odpověď:<span class="spravnaTri"></span></h3>
 
 			<h1>Správně <span id=""></span> ze <span id=""></span> otázek. Úspěšnost je <span id=""></span> % </h1>
 
@@ -55,13 +62,6 @@
 
 
 
-	</div>
-
-
-
-	<!-- přidat <div> pro kvíz -->
-	<!-- do něj přidat <div>y pro samotné držení otázky -->
-	<!-- také nezapomenout na <div> pro výsledek a hodnocení -->
 
 	<script src="main.js"></script>
 
