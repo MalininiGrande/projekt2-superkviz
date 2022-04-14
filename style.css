@@ -34,6 +34,7 @@ h1 {
 }
 
 .kviz,
+
 .vysledek {
 	margin: 30px auto;
 	padding: 50px;
@@ -112,6 +113,12 @@ h1 {
 }
 
 .vysledek h2 {
+	margin-top: 0;
+	font-size: 36px;
+	color: var(--cervena);
+}
+
+#hodnoceni h2 {
 	margin-top: 0;
 	font-size: 36px;
 	color: var(--cervena);

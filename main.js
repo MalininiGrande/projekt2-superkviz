@@ -36,7 +36,6 @@ let vybraneOdpovedi = [];
 let vybraneOdpovediIndex = 0;
 let pocetOtazek = otazky.length;
 let indexOtazky = 0;
-let indexOdpovedi = 0;
 
 
 // // Tato funkce se postará o vygenerování otázky
@@ -49,20 +48,24 @@ function zobrazOtazku() {
     obrazek.src = otazky[indexOtazky].obrazek;
     console.log("Zobraz index, otazku a obrazek");
 
+
+// vlozime odpovedi
+
     for (i = 0; i < pocetOdpovedi; i++) {
 
         console.log("Zobraz odpovedi");
         let item = document.createElement("li");
         item.dataset.odpoved = i;
-        item.innerHTML = otazky[indexOtazky].odpoved[indexOdpovedi];
+        item.innerHTML = otazky[indexOtazky].odpoved[i];
         odpovedi.appendChild(item);
         item.addEventListener("click", priKliknuti);
-        indexOdpovedi += 1;
+        
     }
-
     indexOtazky += 1;
 
 }
+
+// ulozime odpovedi a zvolime, jestli pokracujeme nebo je konecna obrazovka
 
 function priKliknuti() {
     vybraneOdpovedi.push(this.dataset.odpoved);
@@ -77,41 +80,40 @@ function priKliknuti() {
 // Když už mám odpovězeno na vše (řídí se velikosí objektu otazky na řádku 3), tak mohu zobrazi výsledky
 // Vypočítám skóre a nageneruje nové elementy do HTML
 
-
+// schovame kviz a zobrazime vysledek
 function vypisVysledky() {
 kviz.style.display = "none";
 vysledek.style.display = "block";
 
     for (i = 0; i < pocetOtazek; i++) {
-           console.log("Vytvor vysledky")
-        let item = document.createElement("div");
+        console.log("Vytvor vysledky")
         let itemOtazka = document.createElement("h3")
         itemOtazka.innerHTML = (i + 1) + ". " + otazky[i].otazka;
+        vysledek.appendChild(itemOtazka);
+
         let vybranaOdpoved = document.createElement("p");
         vybranaOdpoved.innerHTML = "Tvoje odpověď: " + otazky[i].odpoved[vybraneOdpovedi[i]]
+        vysledek.appendChild(vybranaOdpoved);
+
         let spravna = document.createElement("p");
-        spravna.innerHTML = "Správná odpověď: " + otazky[i].odpoved[otazky[i].spravnaOdpoved];
+        vysledek.appendChild(spravna);
+
+
     
-        vysledek.appendChild(item);
-        item.appendChild(itemOtazka);
-        item.appendChild(vybranaOdpoved);
-        item.appendChild(spravna);
+        if (vybraneOdpovedi[i] == otazky[i].spravnaOdpoved)
+        vybraneOdpovediIndex += 1;
+        spravna.innerHTML = "Správná odpověď: " + otazky[i].odpoved[otazky[i].spravnaOdpoved];
     }
 
     
-// proc se nepocita? Jak dat vysledky na konec?
+// Jak dat vysledky na konec?
+    console.log("procenta");
+    let procenta = document.createElement("h2");
+    hodnoceni.appendChild(procenta);
 
-    let uspesnost = document.createElement("h2");
-    let procentoUspechu = ((vybraneOdpovediIndex * 100) / pocetOtazek);
-    hodnoceni.innerHTML = "Správně " + vybraneOdpovediIndex + " ze " + pocetOtazek + " otázek. Úspěšnost " + Math.floor(procentoUspechu) + "%."
-    vysledek.appendChild(uspesnost);
+    let kolikProcent = Math.floor((vybraneOdpovediIndex * 100) / pocetOtazek);
+    hodnoceni.innerHTML = "Správně " + vybraneOdpovediIndex + " ze " + pocetOtazek + " otázek. Úspěšnost " + kolikProcent + "%."
+    hodnoceni.appendChild(procenta);
 
 }
-
-
-
-
-
-
-
 
