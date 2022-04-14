@@ -6,20 +6,20 @@ const otazky = [
     {otazka: "Kdo je nejhezčí pes na celém širém světě?", 
     obrazek: "obrazky/Hrabac.jpg", 
     odpoved: ["Pitbul Reda", "Výmar Hantík", "Proč se ptáte na psa, když je na fotce hrabáč?"],
-    spravnaOdpoved: "Proč se ptáte na psa, když je na fotce hrabáč?",
+    spravnaOdpoved: "2",
 },
 
 {otazka: "Kdo se stane příštím prezidentem ČR?", 
 obrazek: "obrazky/jirina.jpg", 
 odpoved: ["Dana Drábová","Andrej Babiš", "Jiřina Bohdalová"],
-spravnaOdpoved: "Jiřina Bohdalová",
+spravnaOdpoved: "2",
 },
 
 
 {otazka: "Co jsem pochopila po sedmi lekcích javascriptu?", 
 obrazek: "obrazky/js.png", 
 odpoved: ["Pole, Cykly, Objekty", "Skoro nic", "Co je Javascript?"],
-spravnaOdpoved: "Skoro nic",
+spravnaOdpoved: "1",
 },
 ];
 
@@ -29,114 +29,85 @@ let poradi = document.querySelector('#poradi');
 let otazka = document.querySelector('#otazka');
 let obrazek = document.querySelector('#obrazek');
 let odpovedi = document.querySelector('#odpovedi');
-let vysledek = document.querySelector(".vysledek")
-let odpovedJedna = document.querySelector('.moznostJedna');
-let odpovedDve = document.querySelector('.moznostDva');
-let odpovedTri = document.querySelector('.moznostTri');
-let kolikataOtazka = 1;
-let i = 0;
-let a = 0;
-let kliknuteOdpovedi = [];
-let pocetOdpovedi = otazky[i].odpoved.length;
+let vysledek = document.querySelector(".vysledek");
+
+
+let vybraneOdpovedi = [];
+let vybraneOdpovediIndex = 0;
 let pocetOtazek = otazky.length;
+let indexOtazky = 0;
+let indexOdpovedi = 0;
 
 
+// // Tato funkce se postará o vygenerování otázky
+// // Zavoláme ji jednou na začátku a poté vždy po odpovězení
 
-// Tato funkce se postará o vygenerování otázky
-// Zavoláme ji jednou na začátku a poté vždy po odpovězení
 function zobrazOtazku() {
-otazka.innerHTML = otazky[i].otazka;
-poradi.innerHTML = "Otázka " + kolikataOtazka++ + "/3";
-obrazek.src = otazky[i].obrazek;
-odpovedJedna.innerHTML = otazky[i].odpoved[0];
-odpovedDve.innerHTML = otazky[i].odpoved[1];
-odpovedTri.innerHTML = otazky[i].odpoved[2];
+    let pocetOdpovedi = otazky[indexOtazky].odpoved.length;
+    poradi.innerHTML = "Otázka " + (indexOtazky + 1) + "/" + otazky.length;
+    otazka.innerHTML = otazky[indexOtazky].otazka;
+    obrazek.src = otazky[indexOtazky].obrazek;
+    console.log("Zobraz index, otazku a obrazek");
 
-for (a=0; a < pocetOdpovedi; a++) {
-    let element = document.querySelector("li");
-    element.dataset.odpoved = a;
-    element.innerHTML = otazky[i].odpoved[a];
-    odpovedi.appendChild(element);
-    element.addEventListener("click", klikNaOdpoved);
-}
-}
+    for (i = 0; i < pocetOdpovedi; i++) {
 
-// Funkce se postará o obsluhu kliknutí na odpověď
-// Musíme ji navázat na kokrétní odpovědi každé otázky (to uděláme v rámci funkce zobrazOtazku())
-function klikNaOdpoved() {
-    console.log("klikNaOdpoved");
-    kliknuteOdpovedi.push(element.dataset.odpoved);
-    odpovedi.innerHTML = "";
-    if (i < pocetOtazek) {
-    dalsiOtazka();
-}
-else zobrazVyhodnoceni();
-}
-
-
-
-function dalsiOtazka() {
-   if(i<otazky.length-1)
-{ 
-    i=i+1,
-    zobrazOtazku();
-}
+        console.log("Zobraz odpovedi");
+        let item = document.createElement("li");
+        item.dataset.odpoved = i;
+        item.innerHTML = otazky[indexOtazky].odpoved[indexOdpovedi];
+        odpovedi.appendChild(item);
+        item.addEventListener("click", priKliknuti);
+        indexOdpovedi += 1;
     }
 
-    let vyhodnoceni= document.querySelector(".vysledek")
-    let otazkaJedna = document.querySelector(".otazkaJedna");
-    let otazkaDve = document.querySelector(".otazkaDve");
-    let otazkaTri = document.querySelector(".otazkaTri");
-    let spravnaJedna = document.querySelector(".spravnaJedna");
-    let spravnaDva = document.querySelector(".spravnaDva");
-    let spravnaTri= document.querySelector(".spravnaTri");
-    let tvojeOdpovedJedna= document.querySelector(".tvojeOdpovedJedna");
-    let tvojeOdpovedDva= document.querySelector(".tvojeOdpovedJedna");
-    let tvojeOdpovedTri= document.querySelector(".tvojeOdpovedJedna");
-
-
-
-function zobrazVyhodnoceni () {
-kviz.style.display = "none";
-vysledek.style.display = "block";
-
-    for (i=0, i < pocetOtazek; i++;) {
-    otazkaJedna.innerHTML = otazky[0].otazka;
-    otazkaDva.innerHTML = otazky[1].otazka;
-    otazkaTri.innerHTML = otazky[2].otazka;
-    spravnaJedna.innerHTML = otazky[0].spravnaOdpoved;
-    spravnaDva.innerHTML = otazky[1].spravnaOdpoved;
-    spravnaTri.innerHTML = otazky[2].spravnaOdpoved;
-    tvojeOdpovedJedna.innerHTML = otazky[i].odpoved[kliknuteOdpovedi[i]];
-    tvojeOdpovedDva.innerHTML = otazky[i].odpoved[kliknuteOdpovedi[i+1]];
-    tvojeOdpovedTri.innerHTML = otazky[i].odpoved[kliknuteOdpovedi[i+2]];
+    indexOtazky += 1;
 
 }
+
+function priKliknuti() {
+    vybraneOdpovedi.push(this.dataset.odpoved);
+    odpovedi.innerHTML = "";
+    if (indexOtazky < pocetOtazek) {
+        zobrazOtazku()
+    } else {
+        vypisVysledky()
+    }
 }
-
-
-
-
-
-
-
-
-// }
 
 // Když už mám odpovězeno na vše (řídí se velikosí objektu otazky na řádku 3), tak mohu zobrazi výsledky
 // Vypočítám skóre a nageneruje nové elementy do HTML
-// Touto funkcí končí můj program (budu se rozhodovat, zda ji zavolat v rámci klikNaOdpoved())
-// function zobrazVyhodnoceni() {
-// 
-//     spravnaJedna.innerHTML = otazky[0].spravnaOdpoved;
-//     spravnaDva.innerHTML = otazky[1].spravnaOdpoved;
-//     spravnaTri.innerHTML = otazky[2].spravnaOdpoved;
-//     for (let a=0;a<otazky.length;a++) {
-//         let seznam = document.createElement("li");
-//         seznam.innerHTML = otazky[a].odpoved;
-//         vyhodnoceni.appendChild(seznam);
-//         }
-// }
+
+
+function vypisVysledky() {
+kviz.style.display = "none";
+vysledek.style.display = "block";
+
+    for (i = 0; i < pocetOtazek; i++) {
+           console.log("Vytvor vysledky")
+        let item = document.createElement("div");
+        let itemOtazka = document.createElement("h3")
+        itemOtazka.innerHTML = (i + 1) + ". " + otazky[i].otazka;
+        let vybranaOdpoved = document.createElement("p");
+        vybranaOdpoved.innerHTML = "Tvoje odpověď: " + otazky[i].odpoved[vybraneOdpovedi[i]]
+        let spravna = document.createElement("p");
+        spravna.innerHTML = "Správná odpověď: " + otazky[i].odpoved[otazky[i].spravnaOdpoved];
+    
+        vysledek.appendChild(item);
+        item.appendChild(itemOtazka);
+        item.appendChild(vybranaOdpoved);
+        item.appendChild(spravna);
+    }
+
+    
+// proc se nepocita? Jak dat vysledky na konec?
+
+    let uspesnost = document.createElement("h2");
+    let procentoUspechu = ((vybraneOdpovediIndex * 100) / pocetOtazek);
+    hodnoceni.innerHTML = "Správně " + vybraneOdpovediIndex + " ze " + pocetOtazek + " otázek. Úspěšnost " + Math.floor(procentoUspechu) + "%."
+    vysledek.appendChild(uspesnost);
+
+}
+
 
 
 

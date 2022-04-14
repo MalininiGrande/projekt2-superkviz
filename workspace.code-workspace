@@ -1,10 +1,19 @@
 {
 	"folders": [
 		{
-			"path": "../lekce7-objekty"
+			"path": "."
 		},
 		{
-			"path": "."
+			"path": "../lekce9-prompt-input"
+		},
+		{
+			"path": "../Lekce8-event-listeners-and-dataset"
+		},
+		{
+			"path": "../lekce8-data-atributy"
+		},
+		{
+			"path": "../lekce7-objekty"
 		}
 	],
 	"settings": {
