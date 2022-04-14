@@ -106,7 +106,7 @@ vysledek.style.display = "block";
     }
 
     
-// Jak dat vysledky na konec?
+// Jak dat vysledky na konec???
     console.log("procenta");
     let procenta = document.createElement("h2");
     hodnoceni.appendChild(procenta);
